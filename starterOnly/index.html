@@ -57,8 +57,7 @@
           <div class="modal-body">
             <form
               name="reserve"
-              action="index.html"
-              method="get"
+              method="post"
               onsubmit="return validate();"
             >
               <div
@@ -71,11 +70,11 @@
                   name="first"
                   minlength="2"
                   required
-                  oninvalid="setCustomValidity('Veuillez entrer 2 caractères ou plus pour le champ du prénom')"
-                  oninput="setCustomValidity('')"
                   pattern="\p{Letter}{2,}((\s|-)*\p{Letter}*)*"
+                  title="Non vide et 2 lettres minimum" 
                 /><br>
               </div>
+              <div class="error">Veuillez entrer 2 caractères ou plus pour le champ du prénom</div>
               <div
                 class="formData">
                 <label for="last">Nom</label><br>
@@ -88,8 +87,10 @@
                   oninvalid="setCustomValidity('Veuillez entrer 2 caractères ou plus pour le champ du nom')"
                   oninput="setCustomValidity('')"
                   pattern="\p{Letter}{2,}((\s|-)*\p{Letter}*)*$"
+                  title="Non vide et 2 lettres minimum" 
                 /><br>
               </div>
+              <div class="error">Veuillez entrer 2 caractères ou plus pour le champ du nom</div>
               <div
                 class="formData">
                 <label for="email">E-mail</label><br>
@@ -99,10 +100,9 @@
                   id="email"
                   name="email"
                   required
-                  oninvalid="setCustomValidity('Veuillez entrer une adresse email valide.')"
-                  oninput="setCustomValidity('')"
                 /><br>
               </div>
+              <div class="error">Veuillez entrer une adresse email valide</div>
               <div
                 class="formData">
                 <label for="birthdate">Date de naissance</label><br>
@@ -112,10 +112,9 @@
                   id="birthdate"
                   name="birthdate"
                   required
-                  oninvalid="setCustomValidity('Vous devez entrer votre date de naissance.')"
-                  oninput="setCustomValidity('')"
                 /><br>
               </div>
+              <div class="error">Vous devez entrer votre date de naissance</div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
@@ -126,10 +125,9 @@
                 min="0" 
                 max="99"
                 required
-                oninvalid="setCustomValidity('Veuillez entrer un nombre entre 0 et 99.')"
-                oninput="setCustomValidity('')"  
                 >
               </div>
+              <div class="error">Veuillez entrer un nombre entre 0 et 99</div>
               <p class="text-label">Quelles villes ?</p>
               <div
                 class="formData">
@@ -201,7 +199,7 @@
                   Portland</label
                 >
               </div>
-
+              <div class="error">Veuillez choisir une ville</div>
               <div
                 class="formData">
                 <input
@@ -210,6 +208,7 @@
                   id="checkbox1"
                   name="checkbox1"
                   required
+                  checked
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
@@ -228,6 +227,7 @@
                 </label>
                 <br>
               </div>
+              <div class="error">Veuillez lire et accepter les conditions générales</div>
               <input
                 class="btn-submit"
                 type="submit"
@@ -235,6 +235,17 @@
                 value="C'est parti"
               />
             </form>
+          </div>
+        </div>
+      </div>
+      <div class="confirmation">
+        <div class="content">
+          <span class="close"></span>
+          <div class="modal-body confirm">
+            <p>Thank you for submitting your registration details</p>
+            <button class="btn-close" onclick="closeModal(modalConfirm)">
+              Close
+            </button>
           </div>
         </div>
       </div>

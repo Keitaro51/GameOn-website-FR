@@ -168,7 +168,18 @@ main {
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
-
+.confirmation{
+  display:none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(26, 39, 156, 0.4);
+  
+}
 .content {
   margin: 5% auto;
   width: 100%;
@@ -181,6 +192,8 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  min-height:770px;
+  height:100%;
 }
 
 .modal-body {
@@ -225,6 +238,9 @@ input {
 }
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
+}
+.text-control:valid{
+  border:3px solid green;
 }
 /* 
 input[data-error]::after {
@@ -322,7 +338,8 @@ input[data-error]::after {
   transform: rotate(-45deg);
 }
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-close {
   background: #fe142f;
   display: block;
   margin: 0 auto;
@@ -333,6 +350,14 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+.confirm{
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -527,3 +552,9 @@ footer {
   }
 }
 
+.error{
+  margin-top:5px;
+  display:none;
+  font-size: 0.8rem;
+  color:red;
+}

@@ -9,21 +9,32 @@ function editNav() {
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
+const modalConfirm = document.querySelector(".confirmation");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const modalCloseBtn = document.querySelector(".close");
+const modalCloseBtn = document.querySelectorAll(".close");
 
 // launch/close modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-modalCloseBtn.addEventListener("click", closeModal);
+modalBtn.forEach((btn) => btn.addEventListener("click", function(){launchModal(modalbg)}));
+modalCloseBtn[0].addEventListener("click", function(){closeModal(modalbg)});
+modalCloseBtn[1].addEventListener("click", function(){closeModal(modalConfirm)});
 
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
+/**
+ * launch the selected modal
+ * @param   {string}  modal  [DOM element]
+ * @return  {void}
+ */
+function launchModal(modal) {
+  modal.style.display = "block";
 }
-//close modal
-function closeModal(){
-  modalbg.style.display = "none";
+
+/**
+ * close the selected modal
+ * @param   {string}  modal  [DOM element]
+ * @return  {void}
+ */
+function closeModal(modal){
+  modal.style.display = "none";
 }
 
 /**
@@ -40,6 +51,9 @@ function validate(){
     'quantity' : document.getElementById('quantity').value,
     'city' : cityChecked()
   }
+  closeModal(modalbg);
+  launchModal(modalConfirm);
+  return false; //avoid page refresh
 }
 
 /**
@@ -52,5 +66,19 @@ function cityChecked(){
     if(document.getElementById(`location${i}`).checked){
       return document.getElementById(`location${i}`).value
     }
+  }
+}
+
+//watch inputs and display error msg div if not valid
+formData.forEach((field) => {
+  const inputField = field.getElementsByTagName('input');
+  inputField[0].addEventListener("keyup", function(){validateField(inputField[0])})
+})
+
+function validateField(inputField){ //FIXME ne fonctionne pas convenablement avec radio et checkbox
+  if(!inputField.validity.valid){
+    inputField.parentElement.nextElementSibling.style.display = "block"
+  }else{
+    inputField.parentElement.nextElementSibling.style.display = "none"
   }
 }
