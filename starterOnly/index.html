@@ -61,7 +61,9 @@
               onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer au moins 2 caractères"
+                >
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -71,12 +73,13 @@
                   minlength="2"
                   required
                   pattern="\p{Letter}{2,}((\s|-)*\p{Letter}*)*"
-                  title="Non vide et 2 lettres minimum" 
+                  title="Prénom : Obligatoire, non vide et 2 lettres minimum" 
                 /><br>
               </div>
-              <div class="error">Veuillez entrer 2 caractères ou plus pour le champ du prénom</div>
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer au moins 2 caractères"
+                >
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -84,15 +87,14 @@
                   id="last"
                   name="last"
                   required
-                  oninvalid="setCustomValidity('Veuillez entrer 2 caractères ou plus pour le champ du nom')"
-                  oninput="setCustomValidity('')"
                   pattern="\p{Letter}{2,}((\s|-)*\p{Letter}*)*$"
                   title="Non vide et 2 lettres minimum" 
                 /><br>
               </div>
-              <div class="error">Veuillez entrer 2 caractères ou plus pour le champ du nom</div>
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer une adresse email valide"
+                >
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -102,9 +104,9 @@
                   required
                 /><br>
               </div>
-              <div class="error">Veuillez entrer une adresse email valide</div>
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer votre date de naissance">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -114,9 +116,9 @@
                   required
                 /><br>
               </div>
-              <div class="error">Vous devez entrer votre date de naissance</div>
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer un nombre entre 0 et 99">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" 
                 class="text-control" 
@@ -127,10 +129,10 @@
                 required
                 >
               </div>
-              <div class="error">Veuillez entrer un nombre entre 0 et 99</div>
               <p class="text-label">Quelles villes ?</p>
               <div
-                class="formData">
+                class="formData"
+                >
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -138,6 +140,7 @@
                   name="location"
                   value="New York"
                   required
+                  checked
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -201,7 +204,8 @@
               </div>
               <div class="error">Veuillez choisir une ville</div>
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez lire et accepter les conditions d'utilisation">
                 <input
                   class="checkbox-input"
                   type="checkbox"
@@ -227,7 +231,6 @@
                 </label>
                 <br>
               </div>
-              <div class="error">Veuillez lire et accepter les conditions générales</div>
               <input
                 class="btn-submit"
                 type="submit"
@@ -243,7 +246,7 @@
           <span class="close"></span>
           <div class="modal-body confirm">
             <p>Thank you for submitting your registration details</p>
-            <button class="btn-close" onclick="closeModal(modalConfirm)">
+            <button class="btn-close"">
               Close
             </button>
           </div>

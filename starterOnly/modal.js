@@ -13,11 +13,14 @@ const modalConfirm = document.querySelector(".confirmation");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalCloseBtn = document.querySelectorAll(".close");
+const closeBtn = document.querySelector('.btn-close');
+
 
 // launch/close modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", function(){launchModal(modalbg)}));
 modalCloseBtn[0].addEventListener("click", function(){closeModal(modalbg)});
 modalCloseBtn[1].addEventListener("click", function(){closeModal(modalConfirm)});
+closeBtn.addEventListener("click", function(){closeModal(modalConfirm)});
 
 /**
  * launch the selected modal
@@ -49,7 +52,9 @@ function validate(){
     'email' : document.getElementById('email').value,
     'birthdate' : document.getElementById('birthdate').value,
     'quantity' : document.getElementById('quantity').value,
-    'city' : cityChecked()
+    'city' : cityChecked(),
+    'condition' : document.getElementById('checkbox1').checked,
+    'mailing' : document.getElementById('checkbox2').checked
   }
   closeModal(modalbg);
   launchModal(modalConfirm);
@@ -69,16 +74,16 @@ function cityChecked(){
   }
 }
 
-//watch inputs and display error msg div if not valid
+//watch inputs and display data-error if not valid
 formData.forEach((field) => {
   const inputField = field.getElementsByTagName('input');
-  inputField[0].addEventListener("keyup", function(){validateField(inputField[0])})
+  inputField[0].addEventListener("change", function(){validateField(inputField[0], field)})
 })
 
-function validateField(inputField){ //FIXME ne fonctionne pas convenablement avec radio et checkbox
+function validateField(inputField, formData){
   if(!inputField.validity.valid){
-    inputField.parentElement.nextElementSibling.style.display = "block"
+    formData.setAttribute('data-error-visible','true')
   }else{
-    inputField.parentElement.nextElementSibling.style.display = "none"
+    formData.removeAttribute('data-error-visible')
   }
 }

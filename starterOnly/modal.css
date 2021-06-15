@@ -193,7 +193,6 @@ main {
   color: #fff;
   padding-top: 10px;
   min-height:770px;
-  height:100%;
 }
 
 .modal-body {
@@ -352,7 +351,7 @@ input[data-error]::after {
 }
 
 .confirm{
-  height: 100%;
+  height: 770px;
   display:flex;
   flex-direction: column;
   justify-content: space-around;
@@ -550,11 +549,4 @@ footer {
   to {
     opacity: 1;
   }
-}
-
-.error{
-  margin-top:5px;
-  display:none;
-  font-size: 0.8rem;
-  color:red;
 }
