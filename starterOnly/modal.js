@@ -83,22 +83,35 @@ function cityChecked(){
 
 //watch inputs and display data-error if not valid
 formData.forEach((field) => {
-  const inputField = field.getElementsByTagName('input');
-  inputField[0].addEventListener("change", function(){validateField(inputField[0], field)})
+  const inputField = field.getElementsByTagName('input')[0];
+  inputField.addEventListener("change", function(){validateField(inputField, field)})
 })
 
 /**
- * enable or disable custom error message
+ * enable/disable and select custom error message
  *
  * @param   {string}  inputField  [input DOM element to check]
- * @param   {string}  formData    [DOM element where error is displayed (class="data-error")]
+ * @param   {string}  formData    [DOM element where error is displayed (class="formData")]
  *
  * @return  {void}
  */ 
-function validateField(inputField, formData){
+function validateField(inputField, formData){ 
+  let elt = inputField.getAttribute('id') //checked input id
   if(!inputField.validity.valid){
     formData.setAttribute('data-error-visible','true')
+    formData.setAttribute('data-error', errorMsg[elt])
   }else{
     formData.removeAttribute('data-error-visible')
+    formData.removeAttribute('data-error')
   }
+}
+
+//custom error messages
+let errorMsg = {
+  first: "Veuillez entrer au moins 2 caractères",
+  last: "Veuillez entrer au moins 2 caractères",
+  email: "Veuillez entrer une adresse email valide",
+  birthdate: "Veuillez entrer votre date de naissance",
+  quantity: "Veuillez entrer un nombre entre 0 et 99",
+  checkbox1: "Veuillez lire et accepter les conditions d'utilisation"
 }
