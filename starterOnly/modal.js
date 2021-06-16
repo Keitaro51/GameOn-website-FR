@@ -1,3 +1,19 @@
+// DOM Elements
+const nav = document.querySelector('.icon')
+const modalbg = document.querySelector(".bground");
+const modalConfirm = document.querySelector(".confirmation");
+const modalBtn = document.querySelectorAll(".modal-btn");
+const formData = document.querySelectorAll(".formData");
+const modalCloseBtn = document.querySelectorAll(".close");
+const closeBtn = document.querySelector('.btn-close');
+
+//navbar drop-down for mobile screen
+nav.addEventListener("click", editNav);
+/**
+ * drop-down navbar when click on burger menu icon
+ *
+ * @return  {void}
+ */
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -7,16 +23,7 @@ function editNav() {
   }
 }
 
-// DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalConfirm = document.querySelector(".confirmation");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const modalCloseBtn = document.querySelectorAll(".close");
-const closeBtn = document.querySelector('.btn-close');
-
-
-// launch/close modal event
+// launch/close modal events
 modalBtn.forEach((btn) => btn.addEventListener("click", function(){launchModal(modalbg)}));
 modalCloseBtn[0].addEventListener("click", function(){closeModal(modalbg)});
 modalCloseBtn[1].addEventListener("click", function(){closeModal(modalConfirm)});
@@ -80,6 +87,14 @@ formData.forEach((field) => {
   inputField[0].addEventListener("change", function(){validateField(inputField[0], field)})
 })
 
+/**
+ * enable or disable custom error message
+ *
+ * @param   {string}  inputField  [input DOM element to check]
+ * @param   {string}  formData    [DOM element where error is displayed (class="data-error")]
+ *
+ * @return  {void}
+ */ 
 function validateField(inputField, formData){
   if(!inputField.validity.valid){
     formData.setAttribute('data-error-visible','true')
