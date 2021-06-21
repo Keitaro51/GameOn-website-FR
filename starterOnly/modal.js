@@ -53,6 +53,10 @@ function closeModal(modal){
  * @return  {void}
  */
 function validate(){
+  if(checkNames(document.querySelector('#last')) === false || checkNames(document.querySelector('#first')) === false){
+    return false
+  }
+
   const formContent = {
     'firstname' : document.getElementById('first').value,
     'lastname' : document.getElementById('last').value,
@@ -63,6 +67,7 @@ function validate(){
     'condition' : document.getElementById('checkbox1').checked,
     'mailing' : document.getElementById('checkbox2').checked
   }
+  
   closeModal(modalbg);
   launchModal(modalConfirm);
   return false; //avoid page refresh
@@ -79,6 +84,16 @@ function cityChecked(){
       return document.getElementById(`location${i}`).value
     }
   }
+}
+
+
+//custom error messages
+let errorMsg = {
+  name: "Veuillez entrer au moins 2 caractères",
+  email: "Veuillez entrer une adresse email valide",
+  birthdate: "Veuillez entrer votre date de naissance",
+  quantity: "Veuillez entrer un nombre entre 0 et 99",
+  checkbox1: "Veuillez lire et accepter les conditions d'utilisation"
 }
 
 //watch inputs and display data-error if not valid
@@ -106,12 +121,25 @@ function validateField(inputField, formData){
   }
 }
 
-//custom error messages
-let errorMsg = {
-  first: "Veuillez entrer au moins 2 caractères",
-  last: "Veuillez entrer au moins 2 caractères",
-  email: "Veuillez entrer une adresse email valide",
-  birthdate: "Veuillez entrer votre date de naissance",
-  quantity: "Veuillez entrer un nombre entre 0 et 99",
-  checkbox1: "Veuillez lire et accepter les conditions d'utilisation"
+//check specific regex pattern for name inputs
+let nameInputs = document.querySelectorAll('#first, #last')
+nameInputs.forEach((input)=>input.addEventListener("change", function(){checkNames(input)}))
+
+/**
+ * display or not error message depending on regex pattern validity and other conditions
+ *
+ * @param   {string}  input  [first or lastname input]
+ *
+ * @return  {void}
+ */
+function checkNames(input){
+  let pattern=/^\p{Letter}{2,}((\s|-)*\p{Letter}*)*$/gu
+  if(input.value =="" || input.value.length<2 || pattern.test(input.value) ===false){
+    input.parentElement.setAttribute('data-error-visible','true')
+    input.parentElement.setAttribute('data-error', errorMsg.name)
+    return false
+  }else{
+    input.parentElement.removeAttribute('data-error-visible')
+    input.parentElement.removeAttribute('data-error')
+  }
 }
